@@ -1,6 +1,10 @@
 #!/bin/python3
 
 
+
+from collections import deque
+from copy import copy, deepcopy
+
 def word_ladder(start_word, end_word, dictionary_file='words5.dict'):
     '''
     Returns a list satisfying the following properties:
@@ -28,6 +32,27 @@ def word_ladder(start_word, end_word, dictionary_file='words5.dict'):
     Whenever it is impossible to generate a word ladder between the two words,
     the function returns `None`.
     '''
+    
+    if len(start_word) != len(end_word):
+        return False
+
+    word_stack =[]
+    word_stack.append(start_word)
+    word_q = ([])
+    word_q.append(word_stack)
+
+    while len(word_q) != 0:
+        #dequeue a stack from the queue
+
+        for x in dictionary_file:
+            if _adjacent(x, word_stack[0]):
+                if x == end_word:
+                    word_stack.append(x)
+                    return verify_word_stack(word_stack)
+               # make a copy of the stack
+               # push the found word onto the copy
+               # enqueue the copy
+               # delete word from the dictionary
 
 
 def verify_word_ladder(ladder):
@@ -35,6 +60,7 @@ def verify_word_ladder(ladder):
     Returns True if each entry of the input list is adjacent to its neighbors;
     otherwise returns False.
     '''
+    
 
 
 def _adjacent(word1, word2):
