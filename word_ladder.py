@@ -32,7 +32,9 @@ def word_ladder(start_word, end_word, dictionary_file='words5.dict'):
     Whenever it is impossible to generate a word ladder between the two words,
     the function returns `None`.
     '''
-    
+    with open(words5.dict) as f:
+        xs = f.readlines()
+
     if len(start_word) != len(end_word):
         return False
 
@@ -60,7 +62,10 @@ def verify_word_ladder(ladder):
     Returns True if each entry of the input list is adjacent to its neighbors;
     otherwise returns False.
     '''
-    
+    for i in range (len(ladder)-1):
+        if _adjacent(ladder[i], ladder[i+1]):
+            return True
+        
 
 
 def _adjacent(word1, word2):
@@ -73,3 +78,12 @@ def _adjacent(word1, word2):
     >>> _adjacent('stone','money')
     False
     '''
+    diff = 0 
+    if len(word1) != len(word2):
+        return False
+    for i in range(len(word1)):
+        if word1[i] != word2[i]:
+            diff +=1
+    if diff > 1: return False
+    return True
+
