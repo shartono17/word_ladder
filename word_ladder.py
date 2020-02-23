@@ -49,7 +49,7 @@ def word_ladder(start_word, end_word, dictionary_file='words5.dict'):
         #dequeue a stack from the queue
         wq = word_q.pop()
         for x in full_word_dict:
-            if _adjacent(x, wq[-1]]):
+            if _adjacent(x, wq[-1]):
                 if x == end_word:
                     wq.append(x)
                     return verify_word_stack(word_stack)
