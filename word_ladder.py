@@ -38,7 +38,7 @@ def word_ladder(start_word, end_word, dictionary_file='words5.dict'):
                 copied_wq = deepcopy(wq) #make a DEEPcopy of the stack
                 copied_wq.append(x) # push the found word onto the copy
                 word_q.append(copied_wq) # enqueue the copy
-                full_5word_dict_dict.remove(x) # delete word from the dictionary
+                full_5word_dict.remove(x) # delete word from the dictionary
 
 
 def verify_word_ladder(ladder):
