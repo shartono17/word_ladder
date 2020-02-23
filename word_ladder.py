@@ -26,18 +26,18 @@ def word_ladder(start_word, end_word, dictionary_file='words5.dict'):
     while len(word_q) > 0:
         #dequeue a stack from the queue
         wq = word_q.popleft()
+        copied_dict = deepcopy(full_5word_dict)
         for x in full_5word_dict:
-            if _adjacent(x, wq[-1]):
+            if _adjacent(x, wq[-1]) and x not in wq:
                 if x == end_word:
                     wq.append(x)
-                    if len(wq) == 10 and start_word != "money" and start_word != "stone":
-                        wq.pop()
-                    return wq
-                    break
+                    #if len(wq) == 10 and start_word != "money" and start_word != "stone":
+                     #   wq.pop()
+                    return None
                 copied_wq = deepcopy(wq) #make a DEEPcopy of the stack
                 copied_wq.append(x) # push the found word onto the copy
                 word_q.append(copied_wq) # enqueue the copy
-                full_5word_dict.remove(x) # delete word from the dictionary
+                copied_dict.remove(x) # delete word from the dictionary
 
 
 def verify_word_ladder(ladder):
