@@ -1,62 +1,40 @@
 #!/bin/python3
 
 
-
+import collections
 from collections import deque
 from copy import copy, deepcopy
 
 def word_ladder(start_word, end_word, dictionary_file='words5.dict'):
-    '''
-    Returns a list satisfying the following properties:
-
-    1. the first element is `start_word`
-    2. the last element is `end_word`
-    3. elements at index i and i+1 are `_adjacent`
-    4. all elements are entries in the `dictionary_file` file
-
-    For example, running the command
-    ```
-    word_ladder('stone','money')
-    ```
-    may give the output
-    ```
-    ['stone', 'shone', 'phone', 'phony', 'peony', 'penny', 'benny', 'bonny', 'boney', 'money']
-    ```
-    but the possible outputs are not unique,
-    so you may also get the output
-    ```
-    ['stone', 'shone', 'shote', 'shots', 'soots', 'hoots', 'hooty', 'hooey', 'honey', 'money']
-    ```
-    (We cannot use doctests here because the outputs are not unique.)
-
-    Whenever it is impossible to generate a word ladder between the two words,
-    the function returns `None`.
-    '''
-    with open(dictionary_file) as f:
-        xs = f.readlines()
-    full_word_dict = open(dictionary_file).read().split("\n")
     
+    if start_word == end_word: 
+        final_ladder = [start_word]
+        return final_ladder
 
     if len(start_word) != len(end_word):
         return False
 
-    word_stack =[]  # a stack = list
-    word_stack.append(start_word)
-    word_q = queue() # a deque = a queue
-    word_q.append(word_stack)
+    f = open(dictionary_file, 'r')
+    full_5word_dict = f.split("\n")
 
-    while len(word_q) != 0:
+
+    ladder_stack =[]  # a stack = list
+    word_stack.append(start_word)
+    word_q = deque() # a deque = a queue
+    word_q.append(ladder_stack)
+
+    while len(word_q) > 0:
         #dequeue a stack from the queue
-        wq = word_q.pop()
-        for x in full_word_dict:
+        wq = word_q.popleft()
+        for x in full_5word_dict:
             if _adjacent(x, wq[-1]):
                 if x == end_word:
                     wq.append(x)
-                    return verify_word_stack(word_stack)
-               copied_stack = deepcopy(wq) #make a DEEPcopy of the stack
-               copied_stack.append(x) # push the found word onto the copy
-               wq.appendleft(copied_stack) # enqueue the copy
-               full_word_dict.remove(word) # delete word from the dictionary
+                   # return verify_word_stack(word_stack)
+               copy_wq = deepcopy(wq) #make a DEEPcopy of the stack
+               copied_wq.append(x) # push the found word onto the copy
+               word_q.append(copied_wq) # enqueue the copy
+               full_5word_dict.remove(x) # delete word from the dictionary
 
 
 def verify_word_ladder(ladder):
