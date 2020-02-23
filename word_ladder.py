@@ -19,7 +19,7 @@ def word_ladder(start_word, end_word, dictionary_file='words5.dict'):
 
 
     ladder_stack =[]  # a stack = list
-    word_stack.append(start_word)
+    ladder_stack.append(start_word)
     word_q = deque() # a deque = a queue
     word_q.append(ladder_stack)
 
