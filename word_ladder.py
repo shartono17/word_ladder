@@ -12,7 +12,7 @@ def word_ladder(start_word, end_word, dictionary_file='words5.dict'):
         return final_ladder
 
     if len(start_word) != len(end_word):
-        return False
+        return None
 
     f = open(dictionary_file, 'r')
     full_5word_dict = f.read().split()
