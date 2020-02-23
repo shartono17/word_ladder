@@ -15,7 +15,7 @@ def word_ladder(start_word, end_word, dictionary_file='words5.dict'):
         return None
 
     f = open(dictionary_file, 'r')
-    full_5word_dict = f.read().split()
+    full_5word_dict = [line[0:5] for line in f.readlines()]
 
 
     ladder_stack =[]  # a stack = list
@@ -26,7 +26,7 @@ def word_ladder(start_word, end_word, dictionary_file='words5.dict'):
     while len(word_q) > 0:
         #dequeue a stack from the queue
         wq = word_q.popleft()
-        copied_dict = deepcopy(full_5word_dict)
+        #copied_dict = deepcopy(full_5word_dict)
         for x in full_5word_dict:
             if _adjacent(x, wq[-1]):
                 if x == end_word:
@@ -38,7 +38,7 @@ def word_ladder(start_word, end_word, dictionary_file='words5.dict'):
                 copied_wq = deepcopy(wq) #make a DEEPcopy of the stack
                 copied_wq.append(x) # push the found word onto the copy
                 word_q.append(copied_wq) # enqueue the copy
-                copied_dict.remove(x) # delete word from the dictionary
+                full_5word_dict_dict.remove(x) # delete word from the dictionary
 
 
 def verify_word_ladder(ladder):
