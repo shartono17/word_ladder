@@ -15,7 +15,7 @@ def word_ladder(start_word, end_word, dictionary_file='words5.dict'):
         return False
 
     f = open(dictionary_file, 'r')
-    full_5word_dict = f.split("\n")
+    full_5word_dict = f.read().split()
 
 
     ladder_stack =[]  # a stack = list
