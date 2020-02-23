@@ -28,7 +28,7 @@ def word_ladder(start_word, end_word, dictionary_file='words5.dict'):
         wq = word_q.popleft()
         copied_dict = deepcopy(full_5word_dict)
         for x in full_5word_dict:
-            if _adjacent(x, wq[-1]) and x not in wq:
+            if _adjacent(x, wq[-1]):
                 if x == end_word:
                     wq.append(x)
                     if len(wq) == 10 and start_word != "money" and start_word != "stone":
