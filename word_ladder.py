@@ -32,29 +32,31 @@ def word_ladder(start_word, end_word, dictionary_file='words5.dict'):
     Whenever it is impossible to generate a word ladder between the two words,
     the function returns `None`.
     '''
-    with open(words5.dict) as f:
+    with open(dictionary_file) as f:
         xs = f.readlines()
+    full_word_dict = open(dictionary_file).read().split("\n")
+    
 
     if len(start_word) != len(end_word):
         return False
 
-    word_stack =[]
+    word_stack =[]  # a stack = list
     word_stack.append(start_word)
-    word_q = ([])
+    word_q = queue() # a deque = a queue
     word_q.append(word_stack)
 
     while len(word_q) != 0:
         #dequeue a stack from the queue
-
-        for x in dictionary_file:
-            if _adjacent(x, word_stack[0]):
+        wq = word_q.pop()
+        for x in full_word_dict:
+            if _adjacent(x, wq[-1]]):
                 if x == end_word:
-                    word_stack.append(x)
+                    wq.append(x)
                     return verify_word_stack(word_stack)
-               # make a copy of the stack
-               # push the found word onto the copy
-               # enqueue the copy
-               # delete word from the dictionary
+               copied_stack = deepcopy(wq) #make a DEEPcopy of the stack
+               copied_stack.append(x) # push the found word onto the copy
+               wq.appendleft(copied_stack) # enqueue the copy
+               full_word_dict.remove(word) # delete word from the dictionary
 
 
 def verify_word_ladder(ladder):
@@ -62,11 +64,14 @@ def verify_word_ladder(ladder):
     Returns True if each entry of the input list is adjacent to its neighbors;
     otherwise returns False.
     '''
-    for i in range (len(ladder)-1):
-        if _adjacent(ladder[i], ladder[i+1]):
-            return True
+    if len(ladder) == 0:
+        return False
+    else:
+        for i in range (len(ladder)-1):
+            if not _adjacent(ladder[i], ladder[i+1]):
+                return False
+        return True
         
-
 
 def _adjacent(word1, word2):
     '''
