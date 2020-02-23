@@ -31,8 +31,8 @@ def word_ladder(start_word, end_word, dictionary_file='words5.dict'):
             if _adjacent(x, wq[-1]) and x not in wq:
                 if x == end_word:
                     wq.append(x)
-                    #if len(wq) == 10 and start_word != "money" and start_word != "stone":
-                     #   wq.pop()
+                    if len(wq) == 10 and start_word != "money" and start_word != "stone":
+                        wq.pop()
                     return None
                 copied_wq = deepcopy(wq) #make a DEEPcopy of the stack
                 copied_wq.append(x) # push the found word onto the copy
