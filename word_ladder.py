@@ -26,8 +26,8 @@ def word_ladder(start_word, end_word, dictionary_file='words5.dict'):
     while len(word_q) > 0:
         #dequeue a stack from the queue
         wq = word_q.popleft()
-        copied_dict = deepcopy(full_5word_dict)
-        for x in set(copied_dict):
+        #copied_dict = deepcopy(full_5word_dict)
+        for x in set(full_5word_dict): #doing this already makes it a copy
             if _adjacent(x, wq[-1]):
                 if x == end_word:
                     wq.append(x)
