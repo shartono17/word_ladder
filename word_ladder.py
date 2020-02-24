@@ -34,7 +34,7 @@ def word_ladder(start_word, end_word, dictionary_file='words5.dict'):
                     #if len(wq) == 10 and start_word != "money" and start_word != "stone":
                         #wq.pop()
                     #return (wq)
-                    break
+                    return wq
                 copied_wq = deepcopy(wq) #make a DEEPcopy of the stack
                 copied_wq.append(x) # push the found word onto the copy
                 word_q.append(copied_wq) # enqueue the copy
